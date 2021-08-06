@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Student</title>
+    <style>
+        input.ng-valid {
+            background-color: lightgreen;
+        }
+
+        input.ng-invalid {
+            background-color: lightpink;
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <form class="form-container" name="studentForm" novalidate>
+            <h2>Add New Student</h2>
+            <p>Name: <br>
+                <input name="name" type="text" ng-model="studentModel.current.name" style="margin-top: 10px;" required>
+                <span style="color:red" ng-show="studentForm.name.$error.required ">Name is required.</span>
+            </p>
+
+            <p>Email: <br>
+                <input name="email" type="email" ng-model="studentModel.current.email" length="100"
+                    style="margin-top: 10px;" required>
+                <span style="color:red">
+                    <span ng-show="studentForm.email.$error.required">Email is required.</span>
+                    <span ng-show="studentForm.email.$error.email">Invalid email address.</span>
+                </span>
+            </p>
+
+            <p>Age: <br>
+                <input name="age" id="age" type="range" min="0" max="50" value="1" ng-model="studentModel.current.age"
+                    style="margin-top: 10px;" required>
+                <span>{{studentModel.current.age}}</span>
+                <span style="color:red" ng-show="studentForm.age.$error.required">Age is required.</span>
+            </p>
+
+            <p>Roll No: <br>
+                <input name="rollNo" type="text" id="rollNo" ng-model="studentModel.current.rollNo"
+                    style="margin-top: 10px;" required>
+                <span style="color:red" ng-show="studentForm.rollNo.$error.required">Roll No is
+                    required.</span>
+            </p>
+
+            <p>Gender: <br>
+                <input type="radio" name="isMale" value="true" ng-model="studentModel.current.isMale"
+                    style="margin-top: 10px;" required>
+                <label for="male">Male</label><br>
+                <input type="radio" name="isMale" value="false" ng-model="studentModel.current.isMale" required>
+                <label for="female">Female</label>
+            </p>
+
+            <p>Date: <br>
+                <input name="date" type="date" id="date" ng-model="studentModel.current.date" style="margin-top: 10px;">
+                <span style="color:red" ng-show="studentForm.date.$error.required">Date is required.</span>
+            </p>
+
+            <p>
+                <button ng-click="resetForm()" class="btn btn-outline-success" style="margin-top: 10px;">Reset</button>
+                <button ng-disabled="studentForm.name.$pristine &&  studentForm.name.$invalid 
+                || studentForm.rollNo.$pristine &&  studentForm.rollNo.$invalid 
+                || studentForm.age.$pristine &&  studentForm.age.$invalid 
+                || studentForm.gender.$pristine &&  studentForm.gender.$invalid 
+                || studentForm.date.$pristine &&  studentForm.date.$invalid 
+                || studentForm.email.$pristine &&  studentForm.email.$invalid" ng-click="submitForm()"
+                    class="btn btn-outline-success" style="margin-top: 10px;">Submit</button>
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>
